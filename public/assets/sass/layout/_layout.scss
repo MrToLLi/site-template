@@ -1,0 +1,127 @@
+
+/*-----------------------------------------------------------------------------
+---------------------------3----LAYOUT BASE ELEMENTS----------------------------
+-------------------------------------------------------------------------------*/
+html {
+  overflow-x:hidden;
+  min-height:100%;
+  height:100%;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  min-height:100%;
+  height:100%;
+  background: $primaryColor repeat 0 0;
+}
+
+%s {
+	background-image: url('#{$imgsrc}/sprite.png');
+}
+
+/*-----------------------------------------------------------------------------
+--------------------------------4--------NAVIGATION----------------------------
+-------------------------------------------------------------------------------*/
+
+
+nav[role="navigation"] {
+
+	&.nav--primary {
+		position:relative;
+		text-align:center;
+
+		ul {
+
+			float: right;
+			display: block;
+			margin-top: 10px;
+
+			li {
+				display:inline-block;
+				margin-right: 30px;
+				overflow: hidden;
+				height: 25px;
+			}
+		}
+
+		a {
+			position: relative;
+			color:$primaryColor;
+			@include font-size(14);
+
+		}
+	}
+
+}
+
+/*-----------------------------------------------------------------------------
+------------------------------5----------LAYOUT--------------------------------
+-------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------
+    $Assets for retina display
+---------------------------------------------------*/
+
+/*
+$media only screen and (-webkit-min-device-pixel-ratio: 2),  
+only screen and (min--moz-device-pixel-ratio: 2),  
+only screen and (-o-min-device-pixel-ratio: 2/1),  
+only screen and (min-device-pixel-ratio: 2) {
+  	
+  .logo {
+	  background:url(../_img/logo$2x.png);
+	  background-size:200px 94px;
+  }
+  
+}
+*/
+
+.page-width {
+  width:100%;
+  min-height:100%;
+  height:100%;
+  margin:0;
+  float: left;
+  display:block;
+}
+
+.l-wrap {
+	width: 100%;
+	display: block;
+	overflow: hidden;
+}
+	
+	
+	// Site Main
+	.l-main {
+		position: relative;
+		z-index: 20;
+		background: $secondaryColor;
+	}
+
+	
+	// Site Footer
+	.l-footer {
+		min-height:300px;
+		background:$primaryColor;
+	}
+
+
+
+
+.logo {
+	float: left;
+	display: block;
+	width:45px;
+	height:50px;
+	@extend %s;
+	background-position: -1px -55px;
+	overflow: hidden;
+}
+
+
+
+
+
+

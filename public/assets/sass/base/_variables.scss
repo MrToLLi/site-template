@@ -1,0 +1,112 @@
+
+ //* Debug mode will visually highlight any potential markup/accessibility quirks
+ //* in the browser. Set to `true` or `false`.
+
+$debug-mode:        false;
+
+
+ //* Do you want all elements to adopt `box-sizing:border-box;` as per
+ //* paulirish.com/2012/box-sizing-border-box-ftw ?
+
+$global-border-box: true;
+
+// =============================================================
+// ====================== Site Source Path ========================
+// ================================================================
+
+$imgsrc: "../img";
+// eg. use #{$imgsrc}/blah/blah.jpg
+
+$fontsrc: "../fonts";
+
+
+
+// =============================================================
+// ===================== Typography ============================
+// =============================================================
+
+
+//------------------------------------//
+//    $BASE
+//------------------------------------//
+
+
+// Base stuff - in px --> to be converted to rems
+$base-font-size:    16!default;
+$base-line-height:  24!default;
+
+
+// Base font-family.
+$base-font-family:  sans-serif!default;
+
+
+// Default colour for objects’ borders etc.
+$base-ui-color:     #333!default;
+
+
+// Headings
+$h1-size:           36!default; // .h_alpha
+$h2-size:           30!default; // .h_beta
+$h3-size:           24!default; // .h_gamma
+$h4-size:           20!default; // .h_delta
+$h5-size:           16!default; // .h_epsilon
+$h6-size:           14!default; // .h_zeta
+
+
+$giga-size:         185!default;
+$mega-size:         120!default;
+$kilo-size:         75!default;
+
+
+$milli-size:        12!default;
+$micro-size:        10!default;
+
+$p-size: 			20!default;
+
+
+//------------------------------------//
+//    $Fonts
+//------------------------------------//
+
+$primaryFont: "Trebuchet MS", Arial, Helvetica, sans-serif;
+
+
+$baseFont: normal #{$base-font-size}px/#{$base-line-height}px $primaryFont;
+
+
+$base-spacing-unit: $base-line-height!default;
+$half-spacing-unit: $base-spacing-unit / 2!default;
+$line-height-ratio: $base-line-height / $base-font-size;
+
+
+// Weights
+
+$reg: 400;
+$semiBold: 600;
+$bold: 700;
+
+
+
+// =============================================================
+// ======================= Colour Vars =========================
+// =============================================================
+
+$primaryColor: #333;
+$secondaryColor: #fff;
+$tertiaryColor: #000;
+
+$contrastColor: #16a085;
+
+
+
+$white: $secondaryColor;
+$black: $tertiaryColor;
+$grey: #9a9a9a;
+
+
+$error: #B42C2C; // error red colour
+$success: #090; // success green colour
+
+
+$primaryLinkColor: #{$primaryColor};
+$primaryLinkHoverColor: #{$secondaryColor};

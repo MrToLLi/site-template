@@ -1,0 +1,125 @@
+/*-----------------------------------------------------------------------------
+--------------------------------1--------TYPOGRAPHY----------------------------
+-------------------------------------------------------------------------------*/
+
+// @font-face {
+//     font-family: 'Franchise';
+//     src: url('../fonts/franchise-bold-webfont.eot');
+//     src: url('../fonts/franchise-bold-webfont.eot?#iefix') format('embedded-opentype'),
+//          url('../fonts/franchise-bold-webfont.woff') format('woff'),
+//          url('../fonts/franchise-bold-webfont.ttf') format('truetype'),
+//          url('../fonts/franchise-bold-webfont.svg#franchiseregular') format('svg');
+//     font-weight: normal;
+//     font-style: normal;
+
+// }
+
+
+html {
+  font-size:62.5%;
+}
+
+
+body{
+  font-family:$primaryFont;
+  @include font-size($base-font-size);
+  color:$secondaryColor;
+  font-weight:normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/* Paragraph sizes */
+
+p {
+    color: $secondaryColor;
+    @include font-size($p-size);
+    margin: 0 0 10px;
+    text-align: left;
+}
+
+a, a:active {color:$primaryColor; text-decoration:none; font-weight:normal;}
+a:hover {color:$base-ui-color; text-decoration:none;}
+
+
+ul.bullet {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin:5px 0;
+
+  li {
+    margin:3px 0;
+  }
+
+}
+
+/*-----------------------------------------------------------------------------
+--------------------------------2--------HEADINGS------------------------------
+-------------------------------------------------------------------------------*/
+
+%headings {
+  margin:0;
+  color:$secondaryColor;
+  font-family: $primaryFont;
+  font-weight:normal; 
+}
+
+
+
+// Standard Headings
+h1, 
+.h_alpha, 
+%h_alpha {
+  @extend %headings;
+  @include font-size($h1-size);
+  margin-bottom: 20px;
+}
+
+h2, 
+.h_beta,
+%h_beta {
+  @extend %headings;
+  @include font-size($h2-size);
+}
+h3, 
+.h_gamma,
+%h_gamma {
+  @extend %headings;
+  @include font-size($h3-size);
+}
+
+h4, 
+.h_delta,
+%h_delta {
+  @extend %headings;
+  @include font-size($h4-size);
+}
+
+h5, 
+.h_epsilon,
+%h_epsilon {
+  @extend %headings;
+  @include font-size($h5-size);
+}
+
+h6, 
+.h_zeta,
+%h_zeta{
+  @extend %headings;
+  @include font-size($h6-size);
+}
+
+
+// Mega Headlines
+.h_giga,
+%h_giga {
+    @include font-size($giga-size,$mega-size);
+}
+.h_mega,
+%h_mega {
+    @include font-size($mega-size,$kilo-size);
+}
+.h_kilo,
+%h_kilo {
+    @include font-size($kilo-size,85);
+}

@@ -1,0 +1,539 @@
+// ===================================================================================================================== //
+// ============================ Mixins ================================================================================= //
+// ===================================================================================================================== //
+
+
+
+/* -------------- Silent Classes --------- 
+ - Set some generic classes that kick in when you hit certain breakpoints 
+ - These classes are an extension of columns
+ - These classes are to reset column widths at various breakpoints
+*/
+
+@mixin silent($fraction) {
+  
+    @if $fraction == half {
+        width: 47.916666666666666666666666666667%;
+    }
+    @if $fraction == quarter {
+        width: 22.916666666666666666666666666667%;
+    }
+    @if $fraction == third {
+         width: 31.25%;
+    }
+    @if $fraction == full {
+        width: 97.916666666666666666666666666667%;
+    }
+    @if $fraction == whole {
+        width: 100%;
+    }
+}
+
+
+
+// --------------------------------------------------------------------------- //
+// ------------------------- LONG SHADOWS ------------------------------------ //
+// --------------------------------------------------------------------------- //
+
+
+
+@function makelongshadow($primaryColor) {
+  $val: 0px 0px $primaryColor;
+  @for $i from 1 through 200 {
+    $val: #{$val}, #{$i}px #{$i}px #{$primaryColor};
+  }
+  @return $val;
+}
+
+@mixin longshadow($primaryColor) {
+  text-shadow: makelongshadow($primaryColor);
+}
+
+
+
+
+
+
+
+// --------------------------------------------------------------------------- //
+// ------------------------------- FONTS ------------------------------------- //
+// --------------------------------------------------------------------------- //
+
+
+@mixin fonticon {
+  font-family: 'font-icon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+// px to rem for font-sizes and line-height
+@mixin font-size($sizeValue: 1.6, $line: $sizeValue * 1.5){
+  font-size: ($sizeValue * 1) + px;
+  line-height: ($line * 1) + px;
+  font-size: ($sizeValue / 10) + rem;
+  line-height: ($line / 10) + rem;
+}
+// usage: @include font-size(13);
+
+
+
+
+// word break
+@mixin word-break {
+  -ms-word-break: break-all;
+  word-break: break-all;
+
+  // Non standard for webkit
+  word-break: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  // -webkit-hyphens: auto;
+  // -moz-hyphens: auto;
+  // hyphens: auto;
+
+  // -webkit-hyphenate-before: 2;
+  // -webkit-hyphenate-after: 3;
+  // hyphenate-lines: 3;
+}
+// @include word-break;
+
+
+@mixin ligature {
+  -moz-font-feature-settings: "liga=1, dlig=1";
+  -ms-font-feature-settings: "liga", "dlig";
+  -webkit-font-feature-settings: "liga", "dlig";
+  -o-font-feature-settings: "liga", "dlig";
+  font-feature-settings: "liga", "dlig";
+}
+
+
+@mixin hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+}
+
+
+// --------------------------------------------------------------------------- //
+// ------------------------------- BOX MODEL RELATED ------------------------- //
+// --------------------------------------------------------------------------- //
+
+
+// Box Shadow
+@mixin box-shadow($shadow1, $shadow2:false, $shadow3:false, $shadow4:false, $shadow5:false) {
+ $params: $shadow1;
+  @if $shadow2 
+    { $params: $shadow1, $shadow2; }
+    @if $shadow3 != false
+      { $params: $shadow1, $shadow2, $shadow3; }
+      @if $shadow4 != false
+        { $params: $shadow1, $shadow2, $shadow3, $shadow4; }
+        @if $shadow5 != false
+          { $params: $shadow1, $shadow2, $shadow3, $shadow4, $shadow5; }
+
+  -webkit-box-shadow: $params;
+     -moz-box-shadow: $params;
+          box-shadow: $params;
+}
+
+
+// Border Radius
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+
+// Box Sizing
+@mixin box-sizing ($value) {
+  -webkit-box-sizing: $value;
+     -moz-box-sizing: $value;
+          box-sizing: $value;
+}
+
+// Inline-Block
+@mixin inline-block {
+  display: inline-block;
+  vertical-align: baseline;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+}
+
+@mixin clearfix {
+
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+
+  &:after {
+    clear:both;
+  }
+
+  & {
+    *zoom:1;
+  }
+}
+
+
+// ------------------------------------------------------------------------------------ //
+// ------------------------------- COLOUR RELATED MIXINS ------------------------------ //
+// ------------------------------------------------------------------------------------ //
+
+
+// SASS Darken function
+@mixin colorDarken ($property, $yourcolor, $percent) {
+  $property: darken( $yourcolor, $percent );
+}
+// @include colorDarken(color, #333, 10%);
+
+// SASS Lighten function
+@mixin colorLighten ($property, $yourcolor, $percent) {
+  $property: lighten( $yourcolor, $percent );
+}
+// @include colorLighten(color, #333, 10%);
+
+
+// Grayscaling
+@mixin grayscaleActive {
+  filter: url("data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\'&gt;&lt;filter id=\'grayscale\'&gt;&lt;feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale"); /* Firefox 10+, Firefox on Android */
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+@mixin grayscaleDisabled {
+  filter: url("data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\'&gt;&lt;filter id=\'grayscale\'&gt;&lt;feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale");
+  -webkit-filter: grayscale(0%);
+}
+
+
+// Background Linear Gradient
+@mixin linear-gradient ($place, $bcolor1, $bcolor2){
+  background-image: -moz-linear-gradient($place, $bcolor1, $bcolor2);
+  background-image: -webkit-linear-gradient($place, $bcolor1, $bcolor2);
+  background-image: -o-linear-gradient($place, $bcolor1, $bcolor2);
+  background-image: -ms-linear-gradient($place, $bcolor1, $bcolor2);
+
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$bcolor1}', endColorstr='#{$bcolor2}'); /* IE6,IE7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$bcolor1}', endColorstr='#{$bcolor2}')"; /* IE8+ */
+  
+  background-image: linear-gradient($place, $bcolor1, $bcolor2);
+}
+// usage:
+// @include linear-gradient(top, #ffffff, #333333);
+
+
+// Background Diagonal Linear Gradient
+@mixin diagonal-linear-gradient ($deg, $bcolor1, $bcolor2, $place, $bcolor3, $place2, $bgcolor4, $place3){
+
+  background-image: -webkit-repeating-linear-gradient($deg, $bcolor1, #{$bcolor2} #{$place}, #{$bcolor3} #{$place2}, #{$bgcolor4} #{$place3});
+  background-image: -moz-repeating-linear-gradient($deg, $bcolor1, #{$bcolor2} #{$place}, #{$bcolor3} #{$place2}, #{$bgcolor4} #{$place3});
+  background-image: -o-repeating-linear-gradient($deg, $bcolor1, #{$bcolor2} #{$place}, #{$bcolor3} #{$place2}, #{$bgcolor4} #{$place3});
+  background-image: -ms-repeating-linear-gradient($deg, $bcolor1, #{$bcolor2} #{$place}, #{$bcolor3} #{$place2}, #{$bgcolor4} #{$place3});
+  background-image: repeating-linear-gradient($deg, $bcolor1, #{$bcolor2} #{$place}, #{$bcolor3} #{$place2}, #{$bgcolor4} #{$place3});
+}
+// usage:
+// @include diagonal-linear-gradient(45deg, #ea4824, #ea4824, 5px, #e36042, 4px, #e36042, 14px);
+
+
+
+
+// --------------------------------------------------------------------------------------- //
+// ------------------------------------ TRANSFORM MIXINS --------------------------------- //
+// --------------------------------------------------------------------------------------- //
+
+
+
+// Transform
+@mixin transform($transform) {
+   -webkit-transform: $transform;
+      -moz-transform: $transform;
+        -o-transform: $transform;
+           transform: $transform;
+}
+// usage:
+// @import transform( scale(1,1) );
+
+
+
+
+// Transform Style
+@mixin transform-style($transformStyle) {
+   -webkit-transform-style: $transformStyle;
+      -moz-transform-style: $transformStyle;
+        -o-transform-style: $transformStyle;
+           transform-style: $transformStyle;
+}
+// usage:
+// @import transform-style( preserve-3d );
+
+
+
+// Transform Origin
+@mixin transform-origin($transformOrigin) {
+   -webkit-transform-origin: $transformOrigin;
+      -moz-transform-origin: $transformOrigin;
+        -o-transform-origin: $transformOrigin;
+           transform-origin: $transformOrigin;
+}
+// usage:
+// @import transform-origin( 100% 100% );
+
+
+
+// Rotate
+@mixin rotate( $degrees ) {
+  -webkit-transform: rotate(#{$degrees}deg);
+     -moz-transform: rotate(#{$degrees}deg);
+      -ms-transform: rotate(#{$degrees}deg);
+       -o-transform: rotate(#{$degrees}deg);
+          transform: rotate(#{$degrees}deg);
+}
+// usage:
+// @include rotate( 24 );
+
+
+
+// Transition
+@mixin transition ($transition) {
+  -webkit-transition: $transition;
+     -moz-transition: $transition;
+      -ms-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
+}
+// usage:
+// e.g. @include transition(.6s $easeInOut all);
+
+
+
+
+// Perspective
+@mixin perspective ($perspective) {
+  -webkit-perspective: $perspective;
+     -moz-perspective: $perspective;
+      -ms-perspective: $perspective;
+          perspective: $perspective;
+}
+// usage:
+// e.g. @include perspective( 1000 );
+
+// Perspective
+@mixin perspective-origin ($perspective-origin) {
+  -webkit-perspective-origin: $perspective-origin;
+     -moz-perspective-origin: $perspective-origin;
+      -ms-perspective-origin: $perspective-origin;
+          perspective-origin: $perspective-origin;
+}
+// usage:
+// e.g. @include perspective( 1000 );
+
+
+// Backface Visibility
+@mixin backface-visibility {
+  -webkit-backface-visibility:  hidden;
+     -moz-backface-visibility:  hidden;
+      -ms-backface-visibility:  hidden;
+          backface-visibility:  hidden;
+}
+
+
+
+
+// ------------------------------------------------------------------------------------- //
+// ------------------------------- CROSS BROWSER OPACITY ------------------------------- //
+// ------------------------------------------------------------------------------------- //
+
+@mixin opacity ($value)  {
+  $ms_opacity : $value * 100;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha($ms_opacity)";
+    filter: alpha(opacity=$ms_opacity);
+    opacity: $value;
+}
+
+// usage:
+// @include opacity( 1 );
+
+
+// -------------------------------------------------------------------------------------- //
+// ------------------------------- FORM RELATED MIXINS ---------------------------------- //
+// -------------------------------------------------------------------------------------- //
+
+// Placeholder Input Styles
+@mixin placeholder {
+  &.placeholder { @content };
+  &::-webkit-input-placeholder { @content };
+  &::-moz-placeholder { @content };
+  &:-ms-input-placeholder { @content };
+}
+
+// usage:
+// input {
+//    @include placeholder { 
+//      /some placeholder styles here/ 
+//    }
+// }
+
+
+// -------------------------------------------------------------------------------------- //
+// ------------------------------ IMAGES ------------------------------------------------ //
+// -------------------------------------------------------------------------------------- //
+
+@mixin vector-bg-with-fallback($name) {
+  background-image: url('#{$imgsrc}/img/#{$name}.png');
+  background-image: none, url('#{$imgsrc}/img/#{$name}.svg');
+}
+
+@mixin background-size ($value) {
+  -webkit-background-size: $value;
+     -moz-background-size: $value;
+          background-size: $value;
+}
+
+
+// -------------------------------------------------------------------------------------- //
+// ------------------------------- ANIMATION RELATED MIXINS ----------------------------- //
+// -------------------------------------------------------------------------------------- //
+
+@mixin animation ($name, $origin, $duration, $easing, $delay, $iteration, $direction) {
+
+  -webkit-animation-name: $name;
+  -webkit-transform-origin: $origin;
+  -webkit-animation-duration: $duration;
+  -webkit-animation-timing-function: $easing;
+  -webkit-animation-delay: $delay; 
+  -webkit-animation-iteration-count: $iteration;   
+  -webkit-animation-direction: $direction;
+
+  -moz-animation-name: $name;
+  -moz-transform-origin: $origin;
+  -moz-animation-duration: $duration;
+  -moz-animation-timing-function: $easing;
+  -moz-animation-delay: $delay; 
+  -moz-animation-iteration-count: $iteration;   
+  -moz-animation-direction: $direction;
+
+  -ms-animation-name: $name;
+  -ms-transform-origin: $origin;
+  -ms-animation-duration: $duration;
+  -ms-animation-timing-function: $easing;
+  -ms-animation-delay: $delay; 
+  -ms-animation-iteration-count: $iteration;   
+  -ms-animation-direction: $direction;
+
+  animation-name: $name;
+  transform-origin: $origin;
+  animation-duration: $duration;
+  animation-timing-function: $easing;
+  animation-delay: $delay; 
+  animation-iteration-count: $iteration;   
+  animation-direction: $direction;
+
+}
+// usage:
+// @include animation(flash, center center, 2s, $easeInOut, 0, infinite, forward);
+
+
+
+
+
+//
+// -- Create CSS keyframe animations for all vendors in one go, e.g.:
+//  
+//     @include keyframe(fadeout) {
+//         0% {
+//             opacity: 1;
+//         }
+//      
+//         100% {
+//             opacity: 0;
+//         }
+//     }
+//  
+// -- Courtesy of @integralist: https://gist.github.com/Integralist/3931680
+// 
+
+@mixin keyframe ($animation-name){
+    @-webkit-keyframes $animation-name{
+        @content;
+    }
+    
+    @-moz-keyframes $animation-name{
+        @content;
+    }
+    
+    @-ms-keyframes $animation-name{
+        @content;
+    }
+    
+    @-o-keyframes $animation-name{
+        @content;
+    }
+    
+    @keyframes $animation-name{
+        @content;
+    }
+}
+
+@mixin backface-visibility($value: hidden) {
+  -webkit-backface-visibility: $value;
+  -moz-backface-visibility: $value;
+  -o-backface-visibility: $value;
+  -ms-backface-visibility: $value;
+  backface-visibility: $value;
+}
+
+@mixin hardwareAccelerate {
+  
+  -webkit-transform: translate3d(0,0,0);
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility: hidden;
+
+  -moz-transform: translate3d(0,0,0);
+  -moz-perspective: 1000;
+  -moz-backface-visibility: hidden;
+
+  -ms-transform: translate3d(0,0,0);
+  -ms-perspective: 1000;
+  -ms-backface-visibility: hidden;
+
+  transform: translate3d(0,0,0);
+  perspective: 1000;
+  backface-visibility: hidden;
+}
+// usage:
+// @include hardwareAccelerate;
+
+
+@mixin preserve3d {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+
+// ------------------------------------------------------------------------------ //
+// --------------------------- Animation Easing Types --------------------------- //
+// ------------------------------------------------------------------------------ //
+
+$easeIn: cubic-bezier(0.825, 0.000, 1.000, 0.640);
+$easeInOut: cubic-bezier(0.665, 0.000, 0.430, 1);
+$easeOut: cubic-bezier(0.200, 0.470, 0.435, 0.970);
+$linear: cubic-bezier(0.250, 0.250, 0.750, 0.750);
+
+// usage:
+// e.g. @include transition(.6s $easeInOut all);

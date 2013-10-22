@@ -1,0 +1,221 @@
+/*
+* SCSSkeleton v1.2
+* Written by Ryan Kelley
+* 8/8/2012
+* 
+* Derived From:
+* 
+* Skeleton V1.2
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 6/20/2012
+*/
+
+
+/* Table of Contents
+==================================================
+    #Grid Mixins
+    #Configuration Variables
+    #Media Queries
+    #Clearing */
+
+
+
+/* #Grid Mixins
+================================================== */
+
+/* Standard Grid with Variable-Width Columns */
+@mixin skeleton($column, $gutter) {
+  margin-left: $gutter / 2;
+  margin-right: $gutter / 2;
+
+  &.one { width: $column; }
+  &.two { width: $column * 2 + $gutter; }
+  &.three { width: $column * 3 + $gutter * 2; }
+  &.four { width: $column * 4 + $gutter * 3; }
+  &.five { width: $column * 5 + $gutter * 4; }
+  &.six { width: $column * 6 + $gutter * 5; }
+  &.seven { width: $column * 7 + $gutter * 6; }
+  &.eight { width: $column * 8 + $gutter * 7; }
+  &.nine { width: $column * 9 + $gutter * 8; }
+  &.ten { width: $column * 10 + $gutter * 9; }
+  &.eleven { width: $column * 11 + $gutter * 10; }
+  &.twelve { width: $column * 12 + $gutter * 11; }
+
+  &.one-third { width: (($column * 16 ) + ($gutter * 13)) / 3; }
+  &.two-thirds { width: (($column * 16) + ($gutter * 13)) * (2 / 3) + $gutter; }
+
+  &.offset-by-one { padding-left: $column + $gutter; }
+  &.offset-by-two { padding-left: ($column + $gutter) * 2; }
+  &.offset-by-three { padding-left: ($column + $gutter) * 3; }
+  &.offset-by-four { padding-left: ($column + $gutter) * 4; }
+  &.offset-by-five { padding-left: ($column + $gutter) * 5; }
+  &.offset-by-six { padding-left: ($column + $gutter) * 6; }
+  &.offset-by-seven { padding-left: ($column + $gutter) * 7; }
+  &.offset-by-eight { padding-left: ($column + $gutter) * 8; }
+  &.offset-by-nine { padding-left: ($column + $gutter) * 9; }
+  &.offset-by-ten { padding-left: ($column + $gutter) * 10; }
+  &.offset-by-eleven { padding-left: ($column + $gutter) * 11; }
+}
+
+
+
+/* Grid with Fixed-Width Columns for Small Screens */
+@mixin phone-skeleton($width, $gutter) {
+  margin-left: 0;
+  margin-right: 0;
+  
+  &.one,
+  &.two,
+  &.three,
+  &.four,
+  &.five,
+  &.six,
+  &.seven,
+  &.eight,
+  &.nine,
+  &.ten,
+  &.eleven,
+  &.twelve,
+  &.one-third,
+  &.two-thirds { 
+    width: $width;
+    padding-left:$gutter / 2;
+    padding-right:$gutter / 2;
+  }
+
+  &.offset-by-one,&.offset-by-two,&.offset-by-three,&.offset-by-four,&.offset-by-five,
+  &.offset-by-six,&.offset-by-seven,&.offset-by-eight,&.offset-by-nine,&.offset-by-ten,
+  &.offset-by-eleven,&.offset-by-twelve,&.offset-by-thirteen,&.offset-by-fourteen,
+  &.offset-by-fifteen { padding-left: 0; }
+}
+
+
+/* #Configuration
+================================================== */
+
+
+/* Skeleton Base Grid  */
+  
+  /* For % 960 grid */
+  $sk_base: 1180px;
+  $sk_base_container: $sk_base;
+  $sk_base_column: 6.25%;
+  $sk_base_gutter: 2.08333333333%;
+
+  $sk_base_full: 100%;
+  
+  @mixin media-base { 
+    @media screen and (min-width: #{$sk_base}) { 
+      @content; 
+    } 
+  }
+
+
+
+/* Portrait Tablet Grid */
+  $sk_tablet: 768px;
+  $sk_tablet_max: $sk_base - 1;
+  $sk_tablet_container: $sk_tablet;
+  $sk_tablet_column: 6.25%;
+  $sk_tablet_gutter: 2.08333333333%;
+
+  // // min: 768 -- max: 959
+  // @mixin media-tablet { 
+  //   @media screen and (min-width: #{$sk_tablet}) and (max-width: #{$sk_tablet_max}) { 
+  //     @content; 
+  //   } 
+  // }
+
+
+
+
+
+/* Landscape Phone Grid */
+  $sk_mobile: 480px;
+  $sk_mobile_max: $sk_tablet - 1;
+
+  // max: 480
+  @mixin media-mobile { 
+    @media screen and (max-width: #{$sk_mobile}) { 
+      @content; 
+    }  
+  }
+
+
+
+
+  /* For % 1340 grid */
+  // $sk_big: 1340px;
+  // $sk_big_container: $sk_big;
+  // $sk_big_column: 6.72%;
+  // $sk_big_gutter: 1.6%;
+
+  // @mixin media-big { 
+  //   @media screen and (min-width: #{$sk_big}) { 
+  //     @content; 
+  //   }  
+  // }
+
+ 
+
+/* #Media Queries
+================================================== */
+.container {
+  position:relative;
+  margin:0 auto;
+  padding:0; 
+  max-width: $sk_base_container;
+
+
+  // 768
+  // @include media-tablet { 
+  //     max-width: $sk_tablet_container;
+  // }
+
+  
+  // 480
+  @include media-mobile { 
+      max-width: $sk_mobile; 
+  }
+
+  // @include media-big { 
+  //     max-width: $sk_big; 
+  // }
+
+
+
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+.column,.columns { 
+
+    float: left; 
+    display: inline;
+
+    &.alpha { margin-left: 0; }
+    &.omega { margin-right: 0; }
+
+    @include skeleton($sk_base_column, $sk_base_gutter);
+
+
+    
+    // @include media-tablet { 
+    //     @include skeleton($sk_tablet_column, $sk_tablet_gutter);
+    // }
+
+
+    @include media-mobile { 
+        @include phone-skeleton($sk_base_full, $sk_base_gutter);
+    }
+
+    // @include media-big { 
+    //     @include skeleton($sk_big_column, $sk_big_gutter);
+    // }
+
+}
